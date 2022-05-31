@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SignContractModel_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="SignContractModel">
+              <LayoutGroup Id="SignContractModel_col2">
+                <LayoutItem Id="TelephoneAllowance" RelativeSize="9.81132075471698" Index="3" />
+                <LayoutItem Id="ShuiPayToEmployee" RelativeSize="9.81132075471698" Index="5" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

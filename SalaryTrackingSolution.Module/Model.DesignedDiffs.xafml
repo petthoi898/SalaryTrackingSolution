@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="SalaryTrackingSolution">
+  <BOModel>
+    <Class Name="DevExpress.Persistent.BaseImpl.EF.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
+    <Class Name="SalaryTrackingSolution.Module.UI.Model.AddNewEmployeeModel" DefaultListViewAllowEdit="True" />
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Process" Index="0" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="New Hire" ViewId="AddNewEmployeeModel_DetailView" Caption="New Hire" ObjectKey="138" Index="0" IsNewNode="True" />
+          <Item Id="Sign Contract" ViewId="SignContractModel_DetailView" Index="1" ObjectKey="141" Caption="Sign Contract " IsNewNode="True" />
+          <Item Id="Review Salary Model" ViewId="ReviewSalaryModel_DetailView" ObjectKey="143" Caption="Review Salary " Index="2" IsNewNode="True" />
+          <Item Id="Promotion" ViewId="PromotionModel_DetailView" Caption="Promotion" Index="3" ObjectKey="145" IsNewNode="True" />
+          <Item Id="Demotion" ViewId="DemotionModel_DetailView" Caption="Demotion" Index="4" ObjectKey="147" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Employee" Index="1" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Employee_ListView" ViewId="Employee_ListView" ObjectKey="" Index="0" Caption="List Employee" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Salary" Index="2" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="List Salary" ViewId="ShowDetailSalaryInformation_ListView" ObjectKey="139" Caption="List Salary" Index="0" IsNewNode="True" />
+          <Item Id="History Tracking" ViewId="HistorySalary_ListView" Caption="List History Salary" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Index="3">
+        <Items>
+          <Item Id="Allowance_ListView" Removed="True" />
+          <Item Id="AllowanceCode_ListView" Removed="True" />
+          <Item Id="DemotionModel_ListView" Removed="True" />
+          <Item Id="Employee_ListView" Removed="True" />
+          <Item Id="HistoryAllowance_ListView" Removed="True" />
+          <Item Id="HistorySalary_ListView" Removed="True" />
+          <Item Id="PromotionModel_ListView" Removed="True" />
+          <Item Id="Salary_ListView" Removed="True" />
+          <Item Id="ShowDetailSalaryInformation_ListView" Removed="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options>
+    <LayoutManagerOptions RequiredFieldMark="*" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.7.0" IsNewNode="True" />
+  </SchemaModules>
+  <Validation>
+    <Rules>
+      <RuleRequiredField Id="GlobalId" TargetType="SalaryTrackingSolution.Module.UI.Model.AddNewEmployeeModel" TargetContextIDs="Save" TargetPropertyName="GlobalId" IsNewNode="True" />
+      <RuleUniqueValue Id="GlobalIdUnique" TargetContextIDs="Save" TargetType="SalaryTrackingSolution.Module.BusinessObjects.Employee" TargetPropertyName="GlobalId" IsNewNode="True" />
+      <RuleRequiredField Id="JoinDate" TargetType="SalaryTrackingSolution.Module.UI.Model.AddNewEmployeeModel" TargetPropertyName="JoinDate" TargetContextIDs="Save" IsNewNode="True" />
+      <RuleRequiredField Id="LocalId" ResultType="Error" TargetContextIDs="Save" TargetType="SalaryTrackingSolution.Module.UI.Model.AddNewEmployeeModel" TargetPropertyName="LocalId" IsNewNode="True" />
+    </Rules>
+  </Validation>
+  <Views>
+    <DetailView Id="AddNewEmployeeModel_DetailView" Caption="New Hire">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="AddNewEmployeeModel_col1" ShowCaption="True" Index="0" RelativeSize="69.055374592833871" Caption="Information's Employee" IsNewNode="True">
+              <LayoutItem Id="LocalId" ViewItem="LocalId" Index="0" RelativeSize="9.375" IsNewNode="True" />
+              <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="1" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="2" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="3" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="4" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="FullName" ViewItem="FullName" Index="5" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="TrialSalary" ViewItem="TrialSalary" Index="7" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="TraineeShipContractNo" ViewItem="TraineeShipContractNo" Index="8" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="ProbationSalary" ViewItem="ProbationSalary" Index="9" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="ProbationaryContractNo" ViewItem="ProbationaryContractNo" Index="10" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutGroup Id="Auto347f8e49-f986-4550-8037-51e454b86046" ShowCaption="False" Caption="" Direction="Horizontal" Index="11" RelativeSize="6.770833333333333" IsNewNode="True">
+                <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="0" RelativeSize="50" IsNewNode="True" />
+                <LayoutItem Id="EndDate" ViewItem="EndDate" Index="1" RelativeSize="50" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Active" ViewItem="Active" Index="12" RelativeSize="6.770833333333333" IsNewNode="True" />
+              <LayoutItem Id="Note" ViewItem="Note" Index="13" RelativeSize="9.375" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="AddNewEmployeeModel" RelativeSize="30.944625407166125" Direction="Vertical" Index="1" Caption="Salary's Employee">
+              <LayoutGroup Id="AddNewEmployeeModel_col2" RelativeSize="100" Index="0">
+                <LayoutItem Id="BaseSalary" RelativeSize="24" Index="0" />
+                <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="0" RelativeSize="12.857142857142858" Removed="True" />
+                <LayoutItem Id="ProbationaryContractNo" RelativeSize="20.454545454545453" Index="0" Removed="True" />
+                <LayoutItem Id="Active" RelativeSize="12.871287128712872" Index="1" Removed="True" />
+                <LayoutItem Id="Note" RelativeSize="11.403508771929825" Index="1" Removed="True" />
+                <LayoutItem Id="ResponsibilityAllowance" RelativeSize="17.333333333333332" Index="1" />
+                <LayoutItem Id="HouseTransportAllowance" RelativeSize="17.333333333333332" Index="2" />
+                <LayoutItem Id="EndDate" RelativeSize="10.236220472440945" Index="3" Removed="True" />
+                <LayoutItem Id="TelephoneAllowance" RelativeSize="17.333333333333332" Index="3" />
+                <LayoutItem Id="SHUIPayToEmployeeAllowance" RelativeSize="17.333333333333332" Index="4" />
+                <LayoutItem Id="Item2" Index="5" RelativeSize="6.666666666666667" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="AddNewEmployeeModel_col1" RelativeSize="49.938650306748464" Removed="True">
+                <LayoutItem Id="ProbationSalary" Index="9" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="Item1" Index="10" RelativeSize="50.729927007299267" IsNewNode="True" />
+                <LayoutItem Id="FirstName" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="FullName" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="GlobalId" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="LastName" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="LocalId" RelativeSize="6.5693430656934311" />
+                <LayoutItem Id="MiddleName" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="Segment" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="TraineeShipContractNo" RelativeSize="4.7445255474452557" />
+                <LayoutItem Id="TrialSalary" RelativeSize="4.7445255474452557" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <DetailView Id="DemotionModel_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Direction="Vertical">
+            <LayoutGroup Id="DemotionModel_col1" ShowCaption="True" Index="0" RelativeSize="49.557522123893804" Caption="Information's Employee" IsNewNode="True">
+              <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="14.173228346456693" IsNewNode="True" />
+              <LayoutItem Id="LocalId" ViewItem="LocalId" Index="1" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="2" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="3" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="4" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="5" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="7" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="ProbationScore" ViewItem="ProbationScore" Index="8" RelativeSize="14.173228346456693" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="DemotionModel" Direction="Vertical" RelativeSize="50.442477876106196" Index="1" Caption="Salary's Employee">
+              <LayoutGroup Id="DemotionModel_col1" ShowCaption="False" Index="0" RelativeSize="50" Removed="True">
+                <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="6.5510597302504818" IsNewNode="True" />
+                <LayoutItem Id="LocalId" ViewItem="LocalId" Index="1" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="2" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="FirstName" ViewItem="FirstName" Index="3" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="4" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="LastName" ViewItem="LastName" Index="5" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="7" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="ProbationScore" ViewItem="ProbationScore" Index="8" RelativeSize="58.381502890173408" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="DemotionModel_col2" Index="0" RelativeSize="100">
+                <LayoutItem Id="BaseSalary" RelativeSize="11.063829787234043" Index="0" />
+                <LayoutItem Id="ProbationSalary" ViewItem="ProbationSalary" Index="1" RelativeSize="15.319148936170214" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="ResponsibilityAllowance" RelativeSize="11.063829787234043" Index="2" />
+                <LayoutItem Id="HouseTransportAllowance" RelativeSize="11.063829787234043" Index="3" />
+                <LayoutItem Id="TelephoneAllowance" RelativeSize="11.063829787234043" Index="4" />
+                <LayoutItem Id="ShuiPayToEmployeeAllowance" RelativeSize="11.063829787234043" Index="5" />
+                <LayoutItem Id="EffectiveDate" RelativeSize="11.403508771929825" Index="6" ShowCaption="False" Removed="True" />
+                <LayoutItem Id="Item1" Index="6" RelativeSize="14.042553191489361" IsNewNode="True" />
+                <LayoutItem Id="TotalLaborContractSalary" RelativeSize="15.319148936170214" Index="7" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Employee_DetailView" AllowNew="False" />
+    <ListView Id="Employee_ListView" AllowDelete="False" AllowLink="False" AllowNew="False" />
+    <DetailView Id="HistorySalary_DetailView" AllowDelete="False" AllowEdit="False" AllowNew="False">
+      <Items>
+        <PropertyEditor Id="BaseSalaryNew" AllowEdit="False" />
+        <PropertyEditor Id="BaseSalaryOld" AllowEdit="False" />
+        <PropertyEditor Id="Employee" AllowEdit="False" />
+        <PropertyEditor Id="HouseTransportNew" AllowEdit="False" />
+        <PropertyEditor Id="HouseTransportOld" AllowEdit="False" />
+        <PropertyEditor Id="ResponsibilityNew" AllowEdit="False" />
+        <PropertyEditor Id="ResponsibilityOld" AllowEdit="False" />
+        <PropertyEditor Id="ShuiPayToEmployeeNew" AllowEdit="False" />
+        <PropertyEditor Id="ShuiPayToEmployeeOld" AllowEdit="False" />
+        <PropertyEditor Id="TelephoneNew" AllowEdit="False" />
+        <PropertyEditor Id="TelephoneOld" AllowEdit="False" />
+        <PropertyEditor Id="TypeOfChanges" AllowEdit="False" />
+        <PropertyEditor Id="UpdateAt" AllowEdit="False" />
+        <PropertyEditor Id="UpdateBy" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="HistorySalary_col1" ShowCaption="False" Index="0" RelativeSize="6.3716814159292037" Caption="HistorySalary_col1" IsNewNode="True">
+              <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto9b6bd0de-9700-434f-9f8f-cd7da4afeb72" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="4.6017699115044248" IsNewNode="True">
+              <LayoutItem Id="UpdateBy" ViewItem="UpdateBy" Index="0" RelativeSize="49.941520467836256" IsNewNode="True" />
+              <LayoutItem Id="UpdateAt" ViewItem="UpdateAt" Index="1" RelativeSize="50.058479532163744" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="TypeOfChanges" ViewItem="TypeOfChanges" Index="2" RelativeSize="6.3716814159292037" IsNewNode="True" />
+            <LayoutGroup Id="HistorySalary" Direction="Vertical" Index="3" RelativeSize="82.654867256637175">
+              <LayoutGroup Id="HistorySalary_col2" Index="0" RelativeSize="100" Direction="Vertical" Caption="HistorySalary_col2" ShowCaption="False">
+                <LayoutGroup Id="Auto946b6c74-906d-4504-ae54-af4a525ba0e4" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="34.660421545667447" IsNewNode="True">
+                  <LayoutGroup Id="Autoc6e8dd4a-d226-41ac-8bd5-5f36601c94e1" ShowCaption="False" Caption="" Index="0" RelativeSize="49.819059107358264" IsNewNode="True">
+                    <LayoutItem Id="BaseSalaryOld" ViewItem="BaseSalaryOld" Index="0" RelativeSize="24.324324324324323" IsNewNode="True" />
+                    <LayoutItem Id="ResponsibilityOld" ViewItem="ResponsibilityOld" Index="1" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="TelephoneOld" ViewItem="TelephoneOld" Index="2" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="HouseTransportOld" ViewItem="HouseTransportOld" Index="3" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="ShuiPayToEmployeeOld" ViewItem="ShuiPayToEmployeeOld" Index="4" RelativeSize="22.972972972972972" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutGroup Id="Autobade37c5-0f74-4971-ba6a-b915f807206c" ShowCaption="False" Caption="" Index="1" RelativeSize="50.180940892641736" IsNewNode="True">
+                    <LayoutItem Id="BaseSalaryNew" ViewItem="BaseSalaryNew" Index="0" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="ResponsibilityNew" ViewItem="ResponsibilityNew" Index="1" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="TelephoneNew" ViewItem="TelephoneNew" Index="2" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="HouseTransportNew" ViewItem="HouseTransportNew" Index="3" RelativeSize="17.567567567567568" IsNewNode="True" />
+                    <LayoutItem Id="ShuiPayToEmployeeNew" ViewItem="ShuiPayToEmployeeNew" Index="4" RelativeSize="22.972972972972972" IsNewNode="True" />
+                    <LayoutItem Id="Item1" Index="5" RelativeSize="6.756756756756757" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutItem Id="Item2" Index="1" RelativeSize="65.339578454332553" IsNewNode="True" />
+                <LayoutItem Id="ResponsibilityOld" ViewItem="ResponsibilityOld" Index="1" RelativeSize="7.2829131652661063" Removed="True" />
+                <LayoutItem Id="TelephoneOld" ViewItem="TelephoneOld" Index="2" RelativeSize="7.2829131652661063" Removed="True" />
+                <LayoutItem Id="HouseTransportOld" ViewItem="HouseTransportOld" Index="3" RelativeSize="7.2829131652661063" Removed="True" />
+                <LayoutItem Id="ShuiPayToEmployeeOld" ViewItem="ShuiPayToEmployeeOld" Index="4" RelativeSize="7.2829131652661063" Removed="True" />
+                <LayoutItem Id="UpdateAt" ViewItem="UpdateAt" Index="5" RelativeSize="7.2829131652661063" Removed="True" />
+                <LayoutItem Id="UpdateBy" ViewItem="UpdateBy" Index="6" RelativeSize="7.2829131652661063" Removed="True" />
+                <LayoutItem Id="TypeOfChanges" ViewItem="TypeOfChanges" Index="7" RelativeSize="46.778711484593835" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="HistorySalary_col1" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="HistorySalary_ListView" AllowDelete="False" AllowNew="False" />
+    <DetailView Id="PromotionModel_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="PromotionModel_col1" ShowCaption="True" Index="0" RelativeSize="56.637168141592923" Caption="Information's Employee" IsNewNode="True">
+              <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="12.857142857142858" IsNewNode="True" />
+              <LayoutItem Id="LocalId" ViewItem="LocalId" Index="1" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="2" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="3" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="4" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="5" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="7" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="ProbationScore" ViewItem="ProbationScore" Index="8" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="EffectiveDate" ViewItem="EffectiveDate" Index="9" RelativeSize="12.857142857142858" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PromotionModel" Direction="Vertical" Index="1" RelativeSize="43.362831858407077" Caption="Salary's Employee">
+              <LayoutGroup Id="PromotionModel_col2" Index="0" RelativeSize="100">
+                <LayoutItem Id="ProbationSalary" RelativeSize="17.5609756097561" />
+                <LayoutItem Id="BaseSalary" RelativeSize="12.682926829268293" />
+                <LayoutItem Id="ResponsibilityAllowance" RelativeSize="12.682926829268293" />
+                <LayoutItem Id="HouseTransportAllowance" RelativeSize="12.682926829268293" />
+                <LayoutItem Id="TelephoneAllowance" RelativeSize="12.682926829268293" />
+                <LayoutItem Id="ShuiPayToEmployeeAllowance" RelativeSize="12.682926829268293" />
+                <LayoutItem Id="TotalLaborContractSalary" RelativeSize="19.024390243902438" Index="6" />
+                <LayoutItem Id="EffectiveDate" RelativeSize="11.255411255411255" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="PromotionModel_col1" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ReportDataV2_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ReportDataV2">
+              <LayoutItem Id="DisplayName" ViewItem="DisplayName" Index="0" IsNewNode="True" Removed="True" />
+              <LayoutItem Id="ParametersObjectType" ViewItem="ParametersObjectType" Index="1" IsNewNode="True" Removed="True" />
+              <LayoutItem Id="DataTypeCaption" ViewItem="DataTypeCaption" Index="2" IsNewNode="True" Removed="True" />
+              <LayoutItem Id="IsInplaceReport" Index="3" ViewItem="IsInplaceReport" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ReviewSalaryModel_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Direction="Vertical">
+            <LayoutGroup Id="ReviewSalaryModel_col1" ShowCaption="True" Index="0" RelativeSize="52.0353982300885" Caption="Information's Employee" IsNewNode="True">
+              <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="14.173228346456693" IsNewNode="True" />
+              <LayoutItem Id="LocalId" ViewItem="LocalId" Index="1" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="2" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="3" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="4" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="5" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="7" RelativeSize="10.236220472440945" IsNewNode="True" />
+              <LayoutItem Id="EffectiveDate" ViewItem="EffectiveDate" Index="8" RelativeSize="14.173228346456693" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ReviewSalaryModel" Direction="Vertical" RelativeSize="47.9646017699115" Index="1" Caption="Salary's Employee">
+              <LayoutGroup Id="ReviewSalaryModel_col1" ShowCaption="False" Index="0" RelativeSize="50" Removed="True">
+                <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="6.5510597302504818" IsNewNode="True" />
+                <LayoutItem Id="LocalId" ViewItem="LocalId" Index="1" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="2" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="FirstName" ViewItem="FirstName" Index="3" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="4" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="LastName" ViewItem="LastName" Index="5" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="5.0096339113680157" IsNewNode="True" />
+                <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="7" RelativeSize="63.391136801541428" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="ReviewSalaryModel_col2" ShowCaption="False" Index="0" RelativeSize="100" IsNewNode="True" Removed="True">
+                <LayoutItem Id="ProbationSalary" ViewItem="ProbationSalary" Index="0" RelativeSize="15.584415584415584" IsNewNode="True" />
+                <LayoutItem Id="BaseSalary" ViewItem="BaseSalary" Index="1" RelativeSize="11.255411255411255" IsNewNode="True" />
+                <LayoutItem Id="ResponsibilityAllowance" ViewItem="ResponsibilityAllowance" Index="2" RelativeSize="11.255411255411255" IsNewNode="True" />
+                <LayoutItem Id="HouseTransportAllowance" ViewItem="HouseTransportAllowance" Index="3" RelativeSize="11.255411255411255" IsNewNode="True" />
+                <LayoutItem Id="ShuiPayToEmployeeAllowance" ViewItem="ShuiPayToEmployeeAllowance" Index="4" RelativeSize="11.255411255411255" IsNewNode="True" />
+                <LayoutItem Id="TelephoneAllowance" ViewItem="TelephoneAllowance" Index="5" RelativeSize="11.255411255411255" IsNewNode="True" />
+                <LayoutItem Id="Item1" Index="6" RelativeSize="12.554112554112555" IsNewNode="True" />
+                <LayoutItem Id="TotalLaborContractSalary" ViewItem="TotalLaborContractSalary" Index="7" RelativeSize="15.584415584415584" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ShowDetailSalaryInformation_DetailView" AllowNew="False" AllowDelete="False" AllowEdit="False">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="ShowDetailSalaryInformation_col1" ShowCaption="True" Index="0" RelativeSize="50" Caption="Information's Employee" IsNewNode="True">
+              <LayoutItem Id="LocalId" ViewItem="LocalId" Index="0" RelativeSize="12.857142857142858" IsNewNode="True" />
+              <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="1" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="2" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="3" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="4" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="Segment" ViewItem="Segment" Index="5" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="Note" ViewItem="Note" Index="6" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="Active" ViewItem="Active" Index="7" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="8" RelativeSize="9.2857142857142865" IsNewNode="True" />
+              <LayoutItem Id="EndDate" ViewItem="EndDate" Index="9" RelativeSize="12.857142857142858" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ShowDetailSalaryInformation" Direction="Vertical" Index="1" RelativeSize="50" Caption="Salary's Employee">
+              <LayoutGroup Id="ShowDetailSalaryInformation_col2" Index="0" RelativeSize="100">
+                <LayoutItem Id="BaseSalary" RelativeSize="12.857142857142858" />
+                <LayoutItem Id="Responsibility" RelativeSize="9.2857142857142865" />
+                <LayoutItem Id="HouseTransport" RelativeSize="9.2857142857142865" />
+                <LayoutItem Id="Telephone" RelativeSize="9.2857142857142865" />
+                <LayoutItem Id="ShuiPayToEmployee" RelativeSize="9.2857142857142865" />
+                <LayoutItem Id="SalaryForShui" RelativeSize="9.2857142857142865" Index="5" />
+                <LayoutItem Id="Shui" RelativeSize="9.2857142857142865" Index="6" />
+                <LayoutItem Id="PIT" RelativeSize="9.2857142857142865" Index="7" />
+                <LayoutItem Id="Total" RelativeSize="9.2857142857142865" Index="8" />
+                <LayoutItem Id="TotalGross" RelativeSize="12.857142857142858" />
+              </LayoutGroup>
+              <LayoutGroup Id="ShowDetailSalaryInformation_col1" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ShowDetailSalaryInformation_ListView" AllowNew="False" AllowEdit="False" AllowUnlink="False" AllowDelete="False" />
+    <DetailView Id="SignContractModel_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="SignContractModel_col1" ShowCaption="True" Index="0" RelativeSize="53.451327433628322" Caption="Information's Employee" IsNewNode="True">
+              <LayoutItem Id="Employee" ViewItem="Employee" Index="0" RelativeSize="13.740458015267176" IsNewNode="True" />
+              <LayoutItem Id="LocalId" ViewItem="LocalId" Index="1" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutItem Id="GlobalId" ViewItem="GlobalId" Index="2" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutItem Id="FirstName" ViewItem="FirstName" Index="3" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutItem Id="MiddleName" ViewItem="MiddleName" Index="4" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutItem Id="LastName" ViewItem="LastName" Index="5" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutItem Id="Segment" ViewItem="Segment" Index="6" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutItem Id="ProbationScore" ViewItem="ProbationScore" Index="7" RelativeSize="9.9236641221374047" IsNewNode="True" />
+              <LayoutGroup Id="Autoea86407b-c91d-4577-a2d0-f731e597c0ff" ShowCaption="False" Caption="Autoea86407b-c91d-4577-a2d0-f731e597c0ff(12)" Direction="Horizontal" Index="8" RelativeSize="16.793893129770993" IsNewNode="True">
+                <LayoutItem Id="JoinDate" ViewItem="JoinDate" Index="0" RelativeSize="49.8792270531401" IsNewNode="True" />
+                <LayoutItem Id="EffectiveDate" ViewItem="EffectiveDate" Index="1" RelativeSize="50.1207729468599" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="SignContractModel" Direction="Vertical" Index="1" RelativeSize="46.548672566371678" Caption="Salary's Employee">
+              <LayoutGroup Id="SignContractModel_col2" Index="0" RelativeSize="100">
+                <LayoutItem Id="ProbationSalary" RelativeSize="16.143497757847534" Index="0" />
+                <LayoutItem Id="BaseSalary" RelativeSize="11.659192825112108" Index="1" />
+                <LayoutItem Id="ResponsibilityAllowance" RelativeSize="11.659192825112108" Index="2" />
+                <LayoutItem Id="HouseTransportAllowance" RelativeSize="11.659192825112108" Index="3" />
+                <LayoutItem Id="TelephoneAllowance" ViewItem="TelephoneAllowance" Index="4" RelativeSize="11.659192825112108" IsNewNode="True" />
+                <LayoutItem Id="ShuiPayToEmployeeAllowance" ViewItem="ShuiPayToEmployeeAllowance" Index="5" RelativeSize="11.659192825112108" IsNewNode="True" />
+                <LayoutItem Id="Item1" Index="6" RelativeSize="9.4170403587443943" IsNewNode="True" />
+                <LayoutItem Id="TotalLaborContractSalary" RelativeSize="16.143497757847534" Index="7" />
+                <LayoutItem Id="EffectiveDate" RelativeSize="8.934707903780069" Removed="True" />
+                <LayoutItem Id="ProbationScore" RelativeSize="12.371134020618557" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="SignContractModel_col1" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>
