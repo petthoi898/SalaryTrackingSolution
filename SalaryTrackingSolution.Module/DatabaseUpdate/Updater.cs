@@ -62,8 +62,10 @@ namespace SalaryTrackingSolution.Module.DatabaseUpdate {
 			userAdmin.Roles.Add(adminRole);
             ObjectSpace.CommitChanges(); //This line persists created object(s).
             InitSegment();
+            InitTypeOfContracts();
+            InitTypeOfContractsNewHire();
             //InitEmployee();
-            
+
         }
 
         private Employee CreateEmployee(string name)
@@ -78,25 +80,6 @@ namespace SalaryTrackingSolution.Module.DatabaseUpdate {
                 LastName = name,
                 JoinDate = DateTime.Now
             };
-        }
-        private void InitEmployee()
-        {
-            var employee = ObjectSpace.FirstOrDefault<Employee>(x => x.FirstName == "Tien");
-            if (employee == null)
-            {
-                employee = ObjectSpace.CreateObject<Employee>();
-                employee = CreateEmployee("Tien");
-
-            }
-            var employee1 = ObjectSpace.FirstOrDefault<Employee>(x => x.FirstName == "Lan Anh");
-            if (employee1 == null)
-            {
-                employee1 = ObjectSpace.CreateObject<Employee>();
-                employee1 = CreateEmployee("Lan Anh");
-
-            }
-            ObjectSpace.CommitChanges();
-            
         }
         private void InitSegment()
         {
@@ -114,6 +97,42 @@ namespace SalaryTrackingSolution.Module.DatabaseUpdate {
             }
             ObjectSpace.CommitChanges();
             
+        }
+
+        private void InitTypeOfContractsNewHire()
+        {
+            var segment = ObjectSpace.FirstOrDefault<TypeOfContractsNewHire>(x => x.Name == StaticFile.TypeOfContracts.ProbationContract);
+            if (segment == null)
+            {
+                segment = ObjectSpace.CreateObject<TypeOfContractsNewHire>();
+                segment.Name = StaticFile.TypeOfContracts.ProbationContract;
+            }
+            var segment3 = ObjectSpace.FirstOrDefault<TypeOfContractsNewHire>(x => x.Name == StaticFile.TypeOfContracts.TrainingContract);
+            if (segment3 == null)
+            {
+                segment3 = ObjectSpace.CreateObject<TypeOfContractsNewHire>();
+                segment3.Name = StaticFile.TypeOfContracts.TrainingContract;
+
+            }
+            ObjectSpace.CommitChanges();
+        }
+        private void InitTypeOfContracts()
+        {
+            var segment = ObjectSpace.FirstOrDefault<TypeOfContracts>(x => x.Name == StaticFile.TypeOfContracts.OfficialContractWithPeriod);
+            if (segment == null)
+            {
+                segment = ObjectSpace.CreateObject<TypeOfContracts>();
+                segment.Name = StaticFile.TypeOfContracts.OfficialContractWithPeriod;
+            }
+            var segment3 = ObjectSpace.FirstOrDefault<TypeOfContracts>(x => x.Name == StaticFile.TypeOfContracts.OfficialContractWithoutPeriod);
+            if (segment3 == null)
+            {
+                segment3 = ObjectSpace.CreateObject<TypeOfContracts>();
+                segment3.Name = StaticFile.TypeOfContracts.OfficialContractWithoutPeriod;
+
+            }
+            ObjectSpace.CommitChanges();
+
         }
         public override void UpdateDatabaseBeforeUpdateSchema() {
             base.UpdateDatabaseBeforeUpdateSchema();

@@ -14,6 +14,7 @@ using DevExpress.ExpressApp.Model.Core;
 using DevExpress.ExpressApp.Model.DomainLogics;
 using DevExpress.ExpressApp.Model.NodeGenerators;
 using System.Data.Entity;
+using DevExpress.ExpressApp.ConditionalAppearance;
 using SalaryTrackingSolution.Module.BusinessObjects;
 using DevExpress.ExpressApp.ReportsV2;
 using SalaryTrackingSolution.Module.UI.Model;
@@ -32,6 +33,7 @@ namespace SalaryTrackingSolution.Module {
             // #if DEBUG
             // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<SalaryTrackingSolutionDbContext>());
             // #endif 
+
         }
 
         private SalaryTrackingSolutionDbContext _context;
@@ -65,6 +67,7 @@ namespace SalaryTrackingSolution.Module {
             var nonPersistentObjectSpace = e.ObjectSpace as NonPersistentObjectSpace;
             if (nonPersistentObjectSpace != null)
             {
+                nonPersistentObjectSpace.AutoRefreshAdditionalObjectSpaces = true;
                 nonPersistentObjectSpace.ObjectByKeyGetting += nonPersistentObjectSpace_ObjectByKeyGetting;
                 nonPersistentObjectSpace.ObjectsGetting += NonPersistentObjectSpace_ObjectsGetting;
                 nonPersistentObjectSpace.Committing += NonPersistentObjectSpace_Committing;
@@ -92,29 +95,6 @@ namespace SalaryTrackingSolution.Module {
                 }
             }
         }
-        private ShowDetailSalaryInformation ConvertToDetailSalaryInformation(Salary salary)
-        {
-            var employee = salary.Employee;
-            return new ShowDetailSalaryInformation()
-            {
-                LocalId = employee.LocalId,
-                GlobalId = employee.GlobalId,
-                FirstName = employee.FirstName,
-                MiddleName = employee.MiddleName,
-                LastName = employee.LastName,
-                Active = employee.Active,
-                JoinDate = employee.JoinDate,
-                EndDate = employee.EndDate,
-                Note = employee.Note,
-                BaseSalary = salary.BaseSalary,
-                Responsibility = salary.ResponsibilityAllowance,
-                Telephone = salary.TelephoneAllowance,
-                Segment = employee.Segment,
-                HouseTransport = salary.HouseTransportAllowance,
-                ShuiPayToEmployee = salary.ShuiPayToEmployee
-
-            };
-        }
         private void NonPersistentObjectSpace_ObjectsGetting(object sender, ObjectsGettingEventArgs e)
         {
             ShowDetailSalaryInformation a = new ShowDetailSalaryInformation();
@@ -125,23 +105,35 @@ namespace SalaryTrackingSolution.Module {
                 BindingList<ShowDetailSalaryInformation> objects = new BindingList<ShowDetailSalaryInformation>();
                 var listSalary = _context.Salaries.ToList();
                 objects.AllowEdit = true;
-                
                 foreach (var salary in listSalary)
                 {
                     objects.Add(objectSpace.GetObject(ConvertToDetailSalaryInformation(salary)));
                 }
                 e.Objects = objects;
             }
+            else 
+            if (e.ObjectType == typeof(IndividualSalary))
+            {
+                IObjectSpace objectSpace = (IObjectSpace)sender;
+                BindingList<IndividualSalary> objects = new BindingList<IndividualSalary>();
+                var listHistorySalary = _context.HistorySalaries.ToList();
+                objects.AllowEdit = true;
+
+                foreach (var salary in listHistorySalary)
+                {
+                    objects.Add(objectSpace.GetObject(ConvertSalaryToIndividualSalary(salary)));
+                }
+                e.Objects = DistinctIndividual(objects);
+            }
         }
 
         private void nonPersistentObjectSpace_ObjectByKeyGetting(object sender, ObjectByKeyGettingEventArgs e)
         {
             IObjectSpace objectSpace = (IObjectSpace)sender;
-            
             if (e.ObjectType == typeof(ShowDetailSalaryInformation))
             {
                 BindingList<ShowDetailSalaryInformation> objects = new BindingList<ShowDetailSalaryInformation>();
-                
+
             }
             else if (e.ObjectType.IsAssignableFrom(typeof(AddNewEmployeeModel)))
             {
@@ -151,7 +143,7 @@ namespace SalaryTrackingSolution.Module {
                     obj138.Id = 138;
                     e.Object = obj138;
                 }
-               
+
             }
             else if (e.ObjectType == typeof(SignContractModel))
             {
@@ -189,6 +181,63 @@ namespace SalaryTrackingSolution.Module {
                     e.Object = obj138;
                 }
             }
+            else if (e.ObjectType == typeof(IndividualSalary))
+            {
+                if ((Convert.ToInt64(e.Key)) == 151)
+                {
+                    IndividualSalary obj138 = objectSpace.CreateObject<IndividualSalary>();
+                    obj138.Id = 151;
+                    e.Object = obj138;
+                }
+            }
+        }
+        private ShowDetailSalaryInformation ConvertToDetailSalaryInformation(Salary salary)
+        {
+            var employee = salary.Employee;
+            return new ShowDetailSalaryInformation()
+            {
+                LocalId = employee.LocalId,
+                GlobalId = employee.GlobalId,
+                FirstName = employee.FirstName,
+                MiddleName = employee.MiddleName,
+                LastName = employee.LastName,
+                Active = employee.Active,
+                JoinDate = employee.JoinDate,
+                EndDate = employee.EndDate,
+                Note = employee.Note,
+                BaseSalary = salary.BaseSalary,
+                Responsibility = salary.ResponsibilityAllowance,
+                Telephone = salary.TelephoneAllowance,
+                Segment = employee.Segment,
+                HouseTransport = salary.HouseTransportAllowance,
+                ShuiPayToEmployee = salary.ShuiPayToEmployee
+
+            };
+        }
+
+        private IndividualSalary ConvertSalaryToIndividualSalary(HistorySalary history)
+        {
+            var listHistorySalaries = _context.HistorySalaries.ToList()
+                .Where(x => x.Employee.GlobalId == history.Employee.GlobalId).ToList();
+            return new IndividualSalary()
+            {
+                GlobalId = history.Employee.GlobalId,
+                ListHistorySalaries = listHistorySalaries
+            };
+        }
+
+        private BindingList<IndividualSalary> DistinctIndividual(BindingList<IndividualSalary> objects)
+        {
+            var temp = objects.OrderByDescending(x => x.GlobalId).ToList();
+            for (int i = 0; i < temp.Count - 1; i++)
+            {
+                if (temp[i].GlobalId == temp[i + 1].GlobalId)
+                {
+                    temp.RemoveAt(i);
+                }
+            }
+
+            return new BindingList<IndividualSalary>(temp);
         }
     }
 }

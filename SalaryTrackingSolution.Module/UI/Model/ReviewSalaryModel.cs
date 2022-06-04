@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using DevExpress.Persistent.Base;
@@ -14,7 +15,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
 {
 
     [DomainComponent]
-    public class ReviewSalaryModel : NonPersistentLiteObject, INotifyPropertyChanged, IObjectSpaceLink
+    public class ReviewSalaryModel : NonPersistentLiteObject, INotifyPropertyChanged
     {
         private SalaryTrackingSolutionDbContext _context;
         public ReviewSalaryModel()
@@ -24,23 +25,90 @@ namespace SalaryTrackingSolution.Module.UI.Model
         [Browsable(false)]
         [DevExpress.ExpressApp.Data.Key]
         public Int64 Id { get; set; }
-        public virtual Employee Employee { get; set; }
-        public string LocalId => Employee == null ? null : Employee.LocalId;
+        public virtual Employee Employee
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee;
+                }
+                else return null;
+            }
+        }
+        public string LocalId
+        {
+            get;
+            set;
+        }
+        public string GlobalId
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.GlobalId : null;
+                }
+                else return null;
+            }
+        }
 
-        public string GlobalId => Employee == null ? null : Employee.GlobalId;
+        public string FirstName
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.FirstName : null;
+                }
+                else return null;
+            }
+        }
 
-        public string FirstName => Employee == null ? null : Employee.FirstName;
+        public string MiddleName
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.MiddleName : null;
+                }
+                else return null;
+            }
+        }
 
-        public string MiddleName => Employee == null ? null : Employee.MiddleName;
+        public string LastName
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.LastName : null;
 
-        public string LastName => Employee == null ? null : Employee.LastName;
+                }
+                else return null;
+            }
+        }
 
-        public string Segment => Employee == null ? null : Employee.Segment;
+        public string Segment
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.Segment : null;
+
+                }
+                else return null;
+            }
+        }
         public DateTime? JoinDate => Employee == null ? null : Employee.JoinDate;
-        public Int16 ProbationScore { get; set; }
-
-        public Int64 ProbationSalary => Employee == null ? 0 :
-            Employee.ProbationSalary != 0 ? Employee.ProbationSalary : Employee.TrialSalary;
 
         private Int64 baseSalary;
         public Int64 BaseSalary
@@ -52,7 +120,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                     if (Employee != null)
                     {
                         var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                        baseSalary =  salary != null ? salary.BaseSalary : 0;
+                        return salary != null ? salary.BaseSalary : 0;
                     }
                 }
                 
@@ -77,7 +145,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                     if (Employee != null)
                     {
                         var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                        responsibility =  salary != null ? salary.ResponsibilityAllowance : 0;
+                        return  salary != null ? salary.ResponsibilityAllowance : 0;
                     }
                 }
 
@@ -101,7 +169,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                     if (Employee != null)
                     {
                         var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                        houseTransport = salary != null ? salary.HouseTransportAllowance : 0;
+                        return salary != null ? salary.HouseTransportAllowance : 0;
                     }
                 }
 
@@ -125,7 +193,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                     if (Employee != null)
                     {
                         var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                        telephone = salary != null ? salary.TelephoneAllowance : 0;
+                        return salary != null ? salary.TelephoneAllowance : 0;
                     }
                 }
 
@@ -149,7 +217,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                     if (Employee != null)
                     {
                         var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                        shuiPayToEmployee = salary != null ? salary.ShuiPayToEmployee : 0;
+                        return salary != null ? salary.ShuiPayToEmployee : 0;
                     }
                 }
 
@@ -176,60 +244,126 @@ namespace SalaryTrackingSolution.Module.UI.Model
         }
 
         public Int64 TotalLaborContractSalary =>
-            BaseSalary + ResponsibilityAllowance + HouseTransportAllowance;
+            BaseSalary + ResponsibilityAllowance + HouseTransportAllowance + TelephoneAllowance + ShuiPayToEmployeeAllowance;
 
-        private IObjectSpace objectSpace;
-        IObjectSpace IObjectSpaceLink.ObjectSpace
-        {
-            get { return objectSpace; }
-            set { objectSpace = value; }
-        }
+        
 
-        public override void OnLoaded()
+        public Int64 CurrentBaseSalary
         {
-            base.OnLoaded();
-        }
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.BaseSalary : 0;
+                }
+                else return 0;
+            }
 
-        public override void OnCreated()
-        {
-            base.OnCreated();
         }
+        public Int64 CurrentResponsibilityAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.ResponsibilityAllowance : 0;
+                }
+                else return 0;
+            }
+        }
+        public Int64 CurrentHouseTransportAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.HouseTransportAllowance : 0;
+                }
+                return 0;
+            }
+
+        }
+        public Int64 CurrentTelephoneAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.TelephoneAllowance : 0;
+                }
+
+                return 0;
+            }
+        }
+        public Int64 CurrentShuiPayToEmployeeAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.ShuiPayToEmployee : 0;
+                }
+                return 0;
+            }
+
+        }
+        public Int64 CurrentTotalLaborContractSalary =>
+            CurrentBaseSalary + CurrentResponsibilityAllowance + CurrentHouseTransportAllowance
+            + CurrentTelephoneAllowance + CurrentShuiPayToEmployeeAllowance;
 
         public override void OnSaving()
         {
             if (HasChangeSalary())
             {
                 var salaryOld = _context.Salaries.ToList().LastOrDefault(x => x.EmployeeId == Employee.Id);
-                var newHistory = new HistorySalary()
-                {
-                    EmployeeId = Employee.Id,
-                    TypeOfChanges = TypeOfChanges.Review,
-                    BaseSalaryNew = BaseSalary,
-                    HouseTransportNew = HouseTransportAllowance,
-                    ResponsibilityNew = ResponsibilityAllowance,
-                    TelephoneNew = TelephoneAllowance,
-                    ShuiPayToEmployeeNew = ShuiPayToEmployeeAllowance,
-                    BaseSalaryOld = salaryOld.BaseSalary,
-                    HouseTransportOld = salaryOld.HouseTransportAllowance,
-                    ResponsibilityOld = salaryOld.ResponsibilityAllowance,
-                    TelephoneOld = salaryOld.TelephoneAllowance,
-                    ShuiPayToEmployeeOld = salaryOld.ShuiPayToEmployee,
-                    UpdateAt = DateTime.Now
-                };
+                var newHistory = CreateHistorySalary();
                 _context.HistorySalaries.Add(newHistory);
-                salaryOld.BaseSalary = BaseSalary;
-                salaryOld.ResponsibilityAllowance = ResponsibilityAllowance;
-                salaryOld.HouseTransportAllowance = HouseTransportAllowance;
-                salaryOld.TelephoneAllowance = TelephoneAllowance;
-                salaryOld.ShuiPayToEmployee = ShuiPayToEmployeeAllowance;
+                UpdateSalary();
                 _context.SaveChanges();
+                MessageBox.Show("Successfully Updated!");
+            }
+            else
+            {
+                MessageBox.Show("Nothing changed!");
             }
 
         }
-
-        private void UpdateSalaryInDb()
+        private HistorySalary CreateHistorySalary()
         {
-
+            return new HistorySalary()
+            {
+                EmployeeId = Employee.Id,
+                TypeOfChanges = TypeOfChanges.Review,
+                BaseSalaryNew = BaseSalary,
+                HouseTransportNew = HouseTransportAllowance,
+                ResponsibilityNew = ResponsibilityAllowance,
+                TelephoneNew = TelephoneAllowance,
+                ShuiPayToEmployeeNew = ShuiPayToEmployeeAllowance,
+                BaseSalaryOld = CurrentBaseSalary,
+                HouseTransportOld = CurrentHouseTransportAllowance,
+                ResponsibilityOld = CurrentResponsibilityAllowance,
+                TelephoneOld = CurrentTelephoneAllowance,
+                ShuiPayToEmployeeOld = CurrentShuiPayToEmployeeAllowance,
+                UpdateAt = DateTime.Now
+            };
+        }
+        private void UpdateSalary()
+        {
+            var salary = _context.Salaries.ToList().FirstOrDefault(x => x.EmployeeId == Employee.Id);
+            if (salary != null)
+            {
+                salary.BaseSalary = BaseSalary;
+                salary.HouseTransportAllowance = HouseTransportAllowance;
+                salary.ResponsibilityAllowance = ResponsibilityAllowance;
+                salary.TelephoneAllowance = TelephoneAllowance;
+                salary.ShuiPayToEmployee = ShuiPayToEmployeeAllowance;
+                _context.SaveChanges();
+            }
         }
         private bool HasChangeSalary()
         {

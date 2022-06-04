@@ -31,15 +31,18 @@ namespace SalaryTrackingSolution.Module.BusinessObjects
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; protected set; }
 
-        [Browsable(false)] public Guid EmployeeId { get; set; }
+        [Browsable(false)]
+        public Guid EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
-        public string Manager { get; set; }
+        public string ContractId { get; set; }
         public Int16 ProbationScore { get; set; }
         public Int64 TrialSalary { get; set; }
         public Int64 ProbationSalary { get; set; }
         public Int64 BaseSalary { get; set; }
         public string Note { get; set; }
-        public string TypeOfChanges { get; set; }
+        public string TypeOfContract{ get; set; }
+        public Int16 Period { get; set; }
+        public string Status { get; set; }
 
         #region IXafEntityObject members (see https://documentation.devexpress.com/eXpressAppFramework/clsDevExpressExpressAppIXafEntityObjecttopic.aspx)
         void IXafEntityObject.OnCreated()

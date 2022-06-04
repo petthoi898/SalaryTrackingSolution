@@ -48,6 +48,7 @@ namespace SalaryTrackingSolution.Module.BusinessObjects {
 		//public DbSet<AddNewEmployeeModel>	AddNewEmployeeModels { get; set; }
         public DbSet<Contract> Contracts { get; set; }
 		public DbSet<Segment> Segments { get; set; }
-
+		public DbSet<TypeOfContracts> TypeOfContracts { get; set; }
+		public DbSet<TypeOfContractsNewHire> TypeOfContractsNewHires { get; set; }
     }
 }

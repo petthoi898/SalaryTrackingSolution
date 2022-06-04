@@ -133,6 +133,8 @@
     <Compile Include="BusinessObjects\Contract.cs" />
     <Compile Include="BusinessObjects\Salary.cs" />
     <Compile Include="BusinessObjects\Segment.cs" />
+    <Compile Include="BusinessObjects\TypeOfContracts.cs" />
+    <Compile Include="BusinessObjects\TypeOfContractsNewHire.cs" />
     <Compile Include="Controllers\ConfirmationWindowActionController.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -155,8 +157,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="StaticFile\TypeOfChanges.cs" />
+    <Compile Include="StaticFile\TypeOfContracts.cs" />
     <Compile Include="UI\Model\AddNewEmployeeModel.cs" />
     <Compile Include="UI\Model\DemotionModel.cs" />
+    <Compile Include="UI\Model\IndividualSalary.cs" />
     <Compile Include="UI\Model\PromotionModel.cs" />
     <Compile Include="UI\Model\ReviewSalaryModel.cs" />
     <Compile Include="UI\Model\ShowDetailSalaryInformation.cs" />
@@ -197,18 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\Module\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="UnusableNodes1.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

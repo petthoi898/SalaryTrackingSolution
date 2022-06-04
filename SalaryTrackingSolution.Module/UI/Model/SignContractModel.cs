@@ -6,10 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Editors;
 using DevExpress.Persistent.Base;
 using SalaryTrackingSolution.Module.BusinessObjects;
 using SalaryTrackingSolution.Module.StaticFile;
+using TypeOfContracts = SalaryTrackingSolution.Module.BusinessObjects.TypeOfContracts;
 
 namespace SalaryTrackingSolution.Module.UI.Model
 {
@@ -24,95 +27,270 @@ namespace SalaryTrackingSolution.Module.UI.Model
         [Browsable(false)]
         [DevExpress.ExpressApp.Data.Key]
         public Int64 Id { get; set; }
-        public virtual Employee Employee { get; set; }
-        public string LocalId => Employee == null ? null : Employee.LocalId;
 
-        public string GlobalId => Employee == null ? null : Employee.GlobalId;
+        public string NewContractId { get; set; }
+        public string CurrentContractId
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var contract = _context.Contracts.ToList().FirstOrDefault(x => x.EmployeeId == Employee.Id);
+                    return contract != null ? contract.ContractId : string.Empty;
+                }
+                else return string.Empty;
+            }
 
-        public string FirstName => Employee == null ? null : Employee.FirstName;
+        }
+        public virtual Employee Employee
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee;
+                }
+                else return null;
+            }
+        }
+        public string LocalId
+        {
+            get;
+            set;
+        }
+        public string GlobalId {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.GlobalId : null;
+                }
+                else return null;
+            }
+        }
 
-        public string MiddleName => Employee == null ? null : Employee.MiddleName;
+        public string FirstName
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null? employee.FirstName : null;
+                }
+                else return null;
+            }
+        }
 
-        public string LastName => Employee == null ? null : Employee.LastName;
+        public string MiddleName {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.MiddleName : null;
+                }
+                else return null;
+            }
+        }
 
-        public string Segment => Employee == null ? null : Employee.Segment;
-        public DateTime? JoinDate => Employee == null ? null : Employee.JoinDate;
-        public Int16 ProbationScore { get; set; }
-        public Int64 ProbationSalary => Employee == null ? 0 : Employee.ProbationSalary;
+        public string LastName {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.LastName : null;
 
+                }
+                else return null;
+            }
+        }
+
+        public string Segment
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.Segment : null;
+
+                }
+                else return null;
+            }
+        }
+        public string CurrentContractNote
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var contract = _context.Contracts.ToList().LastOrDefault(x => x.EmployeeId == Employee.Id);
+                    return contract != null ? contract.Note : null;
+
+                }
+                else return null;
+            }
+
+        }
+        public string NewContractNote
+        {
+            get;
+            set;
+        }
+
+        public TypeOfContracts TypeOfContracts
+        {
+            get; 
+            set;
+        }
+
+        public Int16 Period
+        {
+            get;
+            set;
+        }
+        public DateTime? JoinDate
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.JoinDate : null;
+
+                }
+                else return null;
+            }
+        }
+
+        public Int16 ProbationScore
+        {
+            get;
+            set;
+        }
+        public Int64 ProbationSalary
+        {
+            get
+            {
+                if (LocalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
+                    return employee != null ? employee.ProbationSalary == 0 ? employee.TrialSalary : employee.ProbationSalary : 0;
+                }
+                else return 0;
+            }
+        }
+        private Int64 baseSalary;
         public Int64 BaseSalary
         {
             get
             {
-                if (Employee != null)
+                if (baseSalary == 0)
                 {
-                    var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                    return salary != null ? salary.BaseSalary : 0;
+                    if (Employee != null)
+                    {
+                        var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
+                        return salary != null ? salary.BaseSalary : 0;
+                    }
                 }
-
-                return 0;
-
+                return baseSalary;
+            }
+            set
+            {
+                baseSalary = value;
+                OnPropertyChanged(nameof(BaseSalary));
             }
         }
-
+        private Int64 responsibility;
         public Int64 ResponsibilityAllowance
         {
             get
             {
-                if (Employee != null)
+                if (responsibility == 0)
                 {
-                    var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                    return salary != null ? salary.ResponsibilityAllowance : 0;
+                    if (Employee != null)
+                    {
+                        var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
+                        return salary != null ? salary.ResponsibilityAllowance : 0;
+                    }
                 }
 
-                return 0;
+                return responsibility;
 
             }
+            set
+            {
+                responsibility = value;
+                OnPropertyChanged(nameof(ResponsibilityAllowance));
+            }
         }
-
-
+        private Int64 houseTransport;
         public Int64 HouseTransportAllowance
         {
             get
             {
-                if (Employee != null)
+                if (houseTransport == 0)
                 {
-                    var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                    return salary != null ? salary.HouseTransportAllowance + salary.TelephoneAllowance : 0;
+                    if (Employee != null)
+                    {
+                        var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
+                        return salary != null ? salary.HouseTransportAllowance : 0;
+                    }
                 }
-
-                return 0;
-
+                return houseTransport;
+            }
+            set
+            {
+                houseTransport = value;
+                OnPropertyChanged(nameof(HouseTransportAllowance));
             }
         }
-        [VisibleInDetailView(false)]
+        private Int64 telephone;
         public Int64 TelephoneAllowance
         {
             get
             {
-                if (Employee != null)
+                if (telephone == 0)
                 {
-                    var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                    return salary != null ? salary.TelephoneAllowance : 0;
+                    if (Employee != null)
+                    {
+                        var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
+                        return salary != null ? salary.TelephoneAllowance : 0;
+                    }
                 }
-
-                return 0;
-
+                return telephone;
+            }
+            set
+            {
+                telephone = value;
+                OnPropertyChanged(nameof(TelephoneAllowance));
             }
         }
-        [VisibleInDetailView(false)]
+        private Int64 shui;
         public Int64 ShuiPayToEmployeeAllowance
         {
             get
             {
-                if (Employee != null)
+                if (shui == 0)
                 {
-                    var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
-                    return salary != null ? salary.ShuiPayToEmployee : 0;
+                    if (Employee != null)
+                    {
+                        var salary = _context.Salaries.ToList().FirstOrDefault(x => x.Employee.Id == Employee.Id);
+                        return salary != null ? salary.ShuiPayToEmployee : 0;
+                    }
                 }
 
-                return 0;
+                return shui;
 
+            }
+            set
+            {
+                shui = value;
+                OnPropertyChanged(nameof(ShuiPayToEmployeeAllowance));
             }
         }
         public DateTime? EffectiveDate
@@ -127,51 +305,146 @@ namespace SalaryTrackingSolution.Module.UI.Model
                 else return null;
             }
         }
-
         public Int64 TotalLaborContractSalary =>
-            BaseSalary + ResponsibilityAllowance + HouseTransportAllowance ;
-        
-        public override void OnLoaded()
+            BaseSalary + ResponsibilityAllowance + HouseTransportAllowance + TelephoneAllowance + ShuiPayToEmployeeAllowance;
+        public Int64 CurrentBaseSalary
         {
-            base.OnLoaded();
-
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.BaseSalary : 0;
+                }
+                else return 0;
+            }
+            
         }
+        public Int64 CurrentResponsibilityAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.ResponsibilityAllowance : 0;
+                }
+                else return 0;
+            }
+        }
+        public Int64 CurrentHouseTransportAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.HouseTransportAllowance : 0;
+                }
+                return 0;
+            }
+           
+        }
+        public Int64 CurrentTelephoneAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.TelephoneAllowance : 0;
+                }
 
+                return 0;
+            }
+        }
+        public Int64 CurrentShuiPayToEmployeeAllowance
+        {
+            get
+            {
+                if (Employee != null)
+                {
+                    var salary = _context.Salaries.ToList().LastOrDefault(x => x.Employee.Id == Employee.Id);
+                    return salary != null ? salary.ShuiPayToEmployee : 0;
+                }
+                return 0;
+            }
+           
+        }
+        public Int64 CurrentTotalLaborContractSalary =>
+            CurrentBaseSalary + CurrentResponsibilityAllowance + CurrentHouseTransportAllowance 
+            + CurrentTelephoneAllowance + CurrentShuiPayToEmployeeAllowance;
         public override void OnSaving()
         {
-            if (Employee == null)
-                return;
-            var check = _context.HistorySalaries.ToList().Where(x => x.EmployeeId == Employee.Id).ToList().Where(x => x.TypeOfChanges == TypeOfChanges.SignContract).ToList();
-            if (check.Count != 0)
+            if (Employee != null)
             {
-                MessageBox.Show("Contract's Employee has already signed");
-                return;
-
-            }
-            else
-            {
-                var salaryOld = _context.Salaries.ToList().LastOrDefault(x => x.EmployeeId == Employee.Id);
-                var newHistory = new HistorySalary()
-                {
-                    EmployeeId = Employee.Id,
-                    TypeOfChanges = TypeOfChanges.SignContract,
-                    BaseSalaryNew = BaseSalary,
-                    HouseTransportNew = HouseTransportAllowance,
-                    ResponsibilityNew = ResponsibilityAllowance,
-                    TelephoneNew = TelephoneAllowance,
-                    ShuiPayToEmployeeNew = ShuiPayToEmployeeAllowance,
-                    BaseSalaryOld = salaryOld.BaseSalary,
-                    HouseTransportOld = salaryOld.HouseTransportAllowance,
-                    ResponsibilityOld = salaryOld.ResponsibilityAllowance,
-                    TelephoneOld = salaryOld.TelephoneAllowance,
-                    ShuiPayToEmployeeOld = salaryOld.ShuiPayToEmployee,
-                    UpdateAt = DateTime.Now
-                };
+                var newHistory = CreateHistorySalary();
                 _context.HistorySalaries.Add(newHistory);
+                var newContract = CreateNewContract();
+                _context.Contracts.Add(newContract);
+                UpdateSalary();
                 _context.SaveChanges();
                 MessageBox.Show("Successfully sign contract!");
             }
+            else
+            {
+                MessageBox.Show("Fill in Local ID that employee need to sign contract!");
+            }
+           
         }
-        
+        private HistorySalary CreateHistorySalary()
+        {
+            return new HistorySalary()
+            {
+                EmployeeId = Employee.Id,
+                TypeOfChanges = TypeOfChanges.SignContract,
+                BaseSalaryNew = BaseSalary,
+                HouseTransportNew = HouseTransportAllowance,
+                ResponsibilityNew = ResponsibilityAllowance,
+                TelephoneNew = TelephoneAllowance,
+                ShuiPayToEmployeeNew = ShuiPayToEmployeeAllowance,
+                BaseSalaryOld = CurrentBaseSalary,
+                HouseTransportOld = CurrentHouseTransportAllowance,
+                ResponsibilityOld = CurrentResponsibilityAllowance,
+                TelephoneOld = CurrentTelephoneAllowance,
+                ShuiPayToEmployeeOld = CurrentShuiPayToEmployeeAllowance,
+                UpdateAt = DateTime.Now
+            };
+        }
+        private void UpdateSalary()
+        {
+            var salary = _context.Salaries.ToList().FirstOrDefault(x => x.EmployeeId == Employee.Id);
+            if (salary != null)
+            {
+                salary.BaseSalary = BaseSalary;
+                salary.HouseTransportAllowance = HouseTransportAllowance;
+                salary.ResponsibilityAllowance = ResponsibilityAllowance;
+                salary.TelephoneAllowance = TelephoneAllowance;
+                salary.ShuiPayToEmployee = ShuiPayToEmployeeAllowance;
+                _context.SaveChanges();
+            }
+        }
+        private void ObsoleteOldContract()
+        {
+            _context.Contracts.ToList()
+                .Where(x => x.EmployeeId == Employee.Id).ToList()
+                .ForEach(x => x.Status = "Obsolete");
+        }
+        private Contract CreateNewContract()
+        {
+            ObsoleteOldContract();
+            return new Contract()
+            {
+                BaseSalary = BaseSalary,
+                EmployeeId = Employee.Id,
+                ProbationSalary = ProbationSalary,
+                ProbationScore = ProbationScore,
+                TypeOfContract = TypeOfContracts.Name,
+                Period = Period,
+                Note = NewContractNote,
+                Status = "Active"
+            };
+        }
+
     }
 }

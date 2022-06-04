@@ -125,6 +125,18 @@ namespace SalaryTrackingSolution.Module.BusinessObjects
                 }
             }
         }
+
+        private string manager;
+
+        public string Manager
+        {
+            get => manager;
+            set
+            {
+                manager = value;
+                OnPropertyChanged();
+            }
+        }
         private Int64 trialSalary;
 
         public Int64 TrialSalary
