@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="ReviewSalaryModel_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ReviewSalaryModel_col1">
+              <LayoutGroup Id="Auto6017585f-c31d-44d3-a3c9-94b3e38e3c6b">
+                <LayoutItem Id="ProbationSalary" ViewItem="ProbationSalary" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

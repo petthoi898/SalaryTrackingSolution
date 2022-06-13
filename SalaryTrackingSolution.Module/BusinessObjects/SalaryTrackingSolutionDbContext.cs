@@ -50,5 +50,6 @@ namespace SalaryTrackingSolution.Module.BusinessObjects {
 		public DbSet<Segment> Segments { get; set; }
 		public DbSet<TypeOfContracts> TypeOfContracts { get; set; }
 		public DbSet<TypeOfContractsNewHire> TypeOfContractsNewHires { get; set; }
-    }
+		public DbSet<Department> Departments { get; set; }
+	}
 }

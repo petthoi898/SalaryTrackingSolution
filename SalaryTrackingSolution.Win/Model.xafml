@@ -1,7 +1,37 @@
-﻿<Application Logo="ExpressAppLogo">
-	<Options UIType="TabbedMDI" FormStyle="Ribbon" />
-	<NavigationItems NavigationStyle="Accordion" ShowImages="False" DefaultChildItemsDisplayStyle="List"/>
-	<Options ShowTabImage="False">
-		<LayoutManagerOptions EnableLayoutGroupImages="False" />
-	</Options>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="ExpressAppLogo">
+  <NavigationItems NavigationStyle="Accordion" ShowImages="False" DefaultChildItemsDisplayStyle="List" />
+  <Options UIType="TabbedMDI" FormStyle="Ribbon" ShowTabImage="False">
+    <LayoutManagerOptions EnableLayoutGroupImages="False" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.7.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="21.2.7.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="IndividualSalary_DetailView">
+      <Items>
+        <ButtonDetailViewItemWin Id="Export" Caption="Export To Excel" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="11.825192802056556">
+            <LayoutGroup Id="IndividualSalary">
+              <LayoutItem Id="GlobalId" RelativeSize="36.956521739130437" />
+              <LayoutItem Id="LocalId" RelativeSize="28.260869565217391" />
+              <LayoutItem Id="Employee" RelativeSize="34.782608695652172" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="History_Group" ShowCaption="False" Direction="Vertical" RelativeSize="88.174807197943451" Caption="History">
+            <LayoutGroup Id="Auto145140fe-6ad7-474e-89f6-89eab528ab6f" ShowCaption="False" Caption="Auto145140fe-6ad7-474e-89f6-89eab528ab6f(8)" Direction="Vertical" Index="0" RelativeSize="5.2478134110787176" IsNewNode="True">
+              <LayoutItem Id="Item1" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutItem Id="History" RelativeSize="3.7900874635568513" Index="1" />
+            <LayoutItem Id="Item2" Index="2" RelativeSize="86.005830903790084" IsNewNode="True" />
+            <LayoutItem Id="Export" ViewItem="Export" Index="3" RelativeSize="4.9562682215743443" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
 </Application>

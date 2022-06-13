@@ -64,10 +64,26 @@ namespace SalaryTrackingSolution.Module.DatabaseUpdate {
             InitSegment();
             InitTypeOfContracts();
             InitTypeOfContractsNewHire();
+            InitDepartment();
             //InitEmployee();
 
         }
-
+        private void InitDepartment()
+        {
+            var segment = ObjectSpace.FirstOrDefault<Department>(x => x.Name == "Software");
+            if (segment == null)
+            {
+                segment = ObjectSpace.CreateObject<Department>();
+                segment.Name = "Software";
+            }
+            var segment1 = ObjectSpace.FirstOrDefault<Department>(x => x.Name == "Tester");
+            if (segment1 == null)
+            {
+                segment1 = ObjectSpace.CreateObject<Department>();
+                segment1.Name = "Tester";
+            }
+            ObjectSpace.CommitChanges();
+        }
         private Employee CreateEmployee(string name)
         {
             return new Employee()

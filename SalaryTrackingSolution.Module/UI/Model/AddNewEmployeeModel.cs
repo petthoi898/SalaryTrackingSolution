@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.ExpressApp.Data;
 using DevExpress.ExpressApp.DC;
 using DevExpress.Persistent.Base;
@@ -79,7 +80,11 @@ namespace SalaryTrackingSolution.Module.UI.Model
             get;
             set;
         }
-
+        public virtual Department Department
+        {
+            get;
+            set;
+        }
         public TypeOfContractsNewHire TypeOfContractsNewHire
         {
             get; 
@@ -102,11 +107,15 @@ namespace SalaryTrackingSolution.Module.UI.Model
             get;
             set;
         }
-
+        private bool active = true;
         public bool Active
         {
-            get;
-            set;
+            get => active;
+            set
+            {
+                active = value;
+                OnPropertyChanged(nameof(Active));
+            }
         }
 
         public DateTime JoinDate
@@ -120,7 +129,6 @@ namespace SalaryTrackingSolution.Module.UI.Model
             get;
             set;
         }
-
         public Int64 BaseSalary
         {
             get;
@@ -199,8 +207,8 @@ namespace SalaryTrackingSolution.Module.UI.Model
                     ? ContractNo
                     : null,
                 Active = Active,
-                Segment = Segment.Name
-
+                Segment = Segment.Name,
+                Department = Department.Name
             };
         }
         private Salary CreateNewSalary(Employee newEmployee)
@@ -213,7 +221,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                 TelephoneAllowance = TelephoneAllowance,
                 ResponsibilityAllowance = ResponsibilityAllowance,
                 ShuiPayToEmployee = SHUIPayToEmployeeAllowance,
-                BaseSalary = BaseSalary
+                BaseSalary = Salary
             };
         }
         private HistorySalary CreateNewHistorySalary(Employee newEmployee)
@@ -222,12 +230,12 @@ namespace SalaryTrackingSolution.Module.UI.Model
             {
                 EmployeeId = newEmployee.Id,
                 TypeOfChanges = TypeOfChanges.NewHire,
-                BaseSalaryNew = BaseSalary,
+                BaseSalaryNew = Salary,
                 HouseTransportNew = HouseTransportAllowance,
                 ResponsibilityNew = ResponsibilityAllowance,
                 TelephoneNew = TelephoneAllowance,
                 ShuiPayToEmployeeNew = SHUIPayToEmployeeAllowance,
-                UpdateAt = DateTime.Now
+                UpdateAt = JoinDate
             };
         }
         private Contract CreateNewContract(Employee newEmployee)

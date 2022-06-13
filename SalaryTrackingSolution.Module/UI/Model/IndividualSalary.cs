@@ -53,13 +53,33 @@ namespace SalaryTrackingSolution.Module.UI.Model
             }
 
         }
-
-        public IList<HistorySalary> ListHistorySalaries
+        public string Dept
         {
-            get;
-            set;
-        }
+            get
+            {
+                if (GlobalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.GlobalId == GlobalId);
+                    return employee != null ? employee.Department : null;
+                }
 
+                return null;
+            }
+        }
+        public DateTime? JoiningDate
+        {
+            get
+            {
+                if (GlobalId != null)
+                {
+                    var employee = _context.Employees.ToList().FirstOrDefault(x => x.GlobalId == GlobalId);
+                    return employee != null ? employee.JoinDate : null;
+                }
+
+                return null;
+            }
+        }
+        public IList<SalaryInIndividual> History { get; set; }
         
     }
 }

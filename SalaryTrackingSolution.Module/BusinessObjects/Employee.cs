@@ -125,6 +125,16 @@ namespace SalaryTrackingSolution.Module.BusinessObjects
                 }
             }
         }
+        private string dept;
+        public string Department
+        {
+            get => dept;
+            set
+            {
+                dept = value;
+                OnPropertyChanged();
+            }
+        }
 
         private string manager;
 

@@ -38,10 +38,15 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.CodeParser.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v21.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.DataAccess.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v21.2.UI, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataVisualization.v21.2.Core, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Docs.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v21.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -66,23 +71,37 @@
     <Reference Include="DevExpress.Images.v21.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.Office.v21.2.Core, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Persistent.Base.v21.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="DevExpress.Persistent.BaseImpl.EF6.v21.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.PivotGrid.v21.2.Core, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v21.2.Core">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.RichEdit.v21.2.Core, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Spreadsheet.v21.2.Core, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2.UI, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPivotGrid.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v21.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraSpreadsheet.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeMap.v21.2, Version=21.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -106,6 +125,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -119,14 +139,18 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\Allowance.cs" />
     <Compile Include="BusinessObjects\AllowanceCode.cs" />
+    <Compile Include="BusinessObjects\Department.cs" />
     <Compile Include="BusinessObjects\Employee.cs" />
     <Compile Include="BusinessObjects\HistoryAllowance.cs" />
     <Compile Include="BusinessObjects\HistorySalary.cs" />
@@ -140,6 +164,12 @@
     </Compile>
     <Compile Include="Controllers\ConfirmationWindowActionController.Designer.cs">
       <DependentUpon>ConfirmationWindowActionController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NonPersistentObjectActivatorController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\NonPersistentObjectActivatorController.Designer.cs">
+      <DependentUpon>NonPersistentObjectActivatorController.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseUpdate\Updater.cs" />
     <Compile Include="BusinessObjects\ApplicationUser.cs" />
@@ -156,15 +186,43 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SalaryTrackingSolutionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalaryTrackingSolutionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="StaticFile\TypeOfChanges.cs" />
     <Compile Include="StaticFile\TypeOfContracts.cs" />
     <Compile Include="UI\Model\AddNewEmployeeModel.cs" />
     <Compile Include="UI\Model\DemotionModel.cs" />
     <Compile Include="UI\Model\IndividualSalary.cs" />
+    <Compile Include="UI\Model\ListDetailSalaryModel.cs" />
+    <Compile Include="UI\Model\MoveSalaryModel.cs" />
     <Compile Include="UI\Model\PromotionModel.cs" />
     <Compile Include="UI\Model\ReviewSalaryModel.cs" />
+    <Compile Include="UI\Model\SalaryInIndividual.cs" />
+    <Compile Include="UI\Model\SalaryInReportMoveModel.cs" />
     <Compile Include="UI\Model\ShowDetailSalaryInformation.cs" />
     <Compile Include="UI\Model\SignContractModel.cs" />
+    <Compile Include="UI\Model\SummaryModel.cs" />
+    <Compile Include="UI\UserControl\ReportForSalary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControl\ReportForSalary.Designer.cs">
+      <DependentUpon>ReportForSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControl\ucMoveSalary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControl\ucMoveSalary.Designer.cs">
+      <DependentUpon>ucMoveSalary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControl\ucSummary.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControl\ucSummary.Designer.cs">
+      <DependentUpon>ucSummary.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
@@ -172,6 +230,15 @@
       <DependentUpon>Module.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="UI\UserControl\ReportForSalary.resx">
+      <DependentUpon>ReportForSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControl\ucMoveSalary.resx">
+      <DependentUpon>ucMoveSalary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControl\ucSummary.resx">
+      <DependentUpon>ucSummary.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -180,7 +247,14 @@
     <None Include="DatabaseUpdate\ReadMe.txt" />
     <None Include="Images\ReadMe.txt" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.BusinessObjects.HistorySalary.datasource" />
     <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.AddNewEmployeeModel.datasource" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.IndividualSalary.datasource" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.ListDetailSalaryModel.datasource" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.MoveSalaryModel.datasource" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.MoveSalaryModel1.datasource" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.ShowDetailSalaryInformation.datasource" />
+    <None Include="Properties\DataSources\SalaryTrackingSolution.Module.UI.Model.SummaryModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -197,10 +271,24 @@
     <Compile Include="BusinessObjects\SalaryTrackingSolutionDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="SalaryTrackingSolutionDataSet.xsc">
+      <DependentUpon>SalaryTrackingSolutionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SalaryTrackingSolutionDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalaryTrackingSolutionDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SalaryTrackingSolutionDataSet.xss">
+      <DependentUpon>SalaryTrackingSolutionDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Welcome.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\Module\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

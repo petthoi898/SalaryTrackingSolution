@@ -49,7 +49,7 @@ namespace SalaryTrackingSolution.Module.UI.Model
                 if (LocalId != null)
                 {
                     var employee = _context.Employees.ToList().FirstOrDefault(x => x.LocalId == LocalId);
-                    return employee;
+                    return employee != null ? employee : new Employee();
                 }
                 else return null;
             }

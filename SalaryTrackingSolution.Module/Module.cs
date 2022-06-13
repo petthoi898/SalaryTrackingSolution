@@ -116,12 +116,10 @@ namespace SalaryTrackingSolution.Module {
             {
                 IObjectSpace objectSpace = (IObjectSpace)sender;
                 BindingList<IndividualSalary> objects = new BindingList<IndividualSalary>();
-                var listHistorySalary = _context.HistorySalaries.ToList();
-                objects.AllowEdit = true;
-
-                foreach (var salary in listHistorySalary)
+                var listEmployee = _context.Employees.ToList();
+                foreach (var employee in listEmployee)
                 {
-                    objects.Add(objectSpace.GetObject(ConvertSalaryToIndividualSalary(salary)));
+                    objects.Add(objectSpace.GetObject(ConvertSalaryToIndividualSalary(employee)));
                 }
                 e.Objects = DistinctIndividual(objects);
             }
@@ -133,7 +131,12 @@ namespace SalaryTrackingSolution.Module {
             if (e.ObjectType == typeof(ShowDetailSalaryInformation))
             {
                 BindingList<ShowDetailSalaryInformation> objects = new BindingList<ShowDetailSalaryInformation>();
-
+                if (Convert.ToInt64(e.Key) == 161)
+                {
+                    ShowDetailSalaryInformation obj138 = objectSpace.CreateObject<ShowDetailSalaryInformation>();
+                    obj138.Id = 161;
+                    e.Object = obj138;
+                }
             }
             else if (e.ObjectType.IsAssignableFrom(typeof(AddNewEmployeeModel)))
             {
@@ -189,6 +192,30 @@ namespace SalaryTrackingSolution.Module {
                     obj138.Id = 151;
                     e.Object = obj138;
                 }
+                if ((Convert.ToInt64(e.Key)) == 171)
+                {
+                    IndividualSalary obj138 = objectSpace.CreateObject<IndividualSalary>();
+                    obj138.Id = 171;
+                    e.Object = obj138;
+                }
+            }
+            else if (e.ObjectType == typeof(MoveSalaryModel))
+            {
+                if ((Convert.ToInt64(e.Key)) == 163)
+                {
+                    MoveSalaryModel obj138 = objectSpace.CreateObject<MoveSalaryModel>();
+                    obj138.Id = 163;
+                    e.Object = obj138;
+                }
+            }
+            else if (e.ObjectType == typeof(SummaryModel))
+            {
+                if ((Convert.ToInt64(e.Key)) == 201)
+                {
+                    SummaryModel obj138 = objectSpace.CreateObject<SummaryModel>();
+                    obj138.Id = 201;
+                    e.Object = obj138;
+                }
             }
         }
         private ShowDetailSalaryInformation ConvertToDetailSalaryInformation(Salary salary)
@@ -214,15 +241,48 @@ namespace SalaryTrackingSolution.Module {
 
             };
         }
-
-        private IndividualSalary ConvertSalaryToIndividualSalary(HistorySalary history)
+        private List<SalaryInIndividual> CreateHistory(Employee employee)
         {
+            var listSalaryInIndividual = new List<SalaryInIndividual>();
             var listHistorySalaries = _context.HistorySalaries.ToList()
-                .Where(x => x.Employee.GlobalId == history.Employee.GlobalId).ToList();
+                .Where(x => x.Employee.GlobalId == employee.GlobalId).ToList();
+            for(int i = 0; i < listHistorySalaries.Count - 1; i++)
+            {
+                var salary = listHistorySalaries.ElementAt(i);
+                var date = listHistorySalaries.ElementAt(i + 1).UpdateAt;
+                listSalaryInIndividual.Add(new SalaryInIndividual
+                {
+                    Time = salary.UpdateAt.ToShortDateString()
+                    + "-" + new DateTime(date.Year, date.Month, 1).ToShortDateString(),
+                    TypeOfChanges = salary.TypeOfChanges,
+                    BaseSalary = salary.BaseSalaryNew,
+                    Responsibility = salary.ResponsibilityNew,
+                    Telephone = salary.TelephoneNew,
+                    ShuiPayToEmployee = salary.ShuiPayToEmployeeNew,
+                    HouseTransport = salary.HouseTransportNew,
+
+                });
+            }
+            var last = listHistorySalaries.Last();
+            listSalaryInIndividual.Add(new SalaryInIndividual
+            {
+                Time = new DateTime(last.UpdateAt.Year, last.UpdateAt.Month, 1).ToShortDateString()+ "-now",
+                TypeOfChanges = last.TypeOfChanges,
+                BaseSalary = last.BaseSalaryNew,
+                Responsibility = last.ResponsibilityNew,
+                Telephone = last.TelephoneNew,
+                ShuiPayToEmployee = last.ShuiPayToEmployeeNew,
+                HouseTransport = last.HouseTransportNew,
+
+            });
+            return listSalaryInIndividual;
+        }
+        private IndividualSalary ConvertSalaryToIndividualSalary(Employee employee)
+        {
             return new IndividualSalary()
             {
-                GlobalId = history.Employee.GlobalId,
-                ListHistorySalaries = listHistorySalaries
+                GlobalId = employee.GlobalId,
+                History = CreateHistory(employee)
             };
         }
 

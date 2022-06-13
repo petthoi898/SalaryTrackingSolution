@@ -47,6 +47,10 @@ namespace SalaryTrackingSolution.Module.BusinessObjects
         public Int64 TelephoneOld { get; set; }
         public Int64 HouseTransportOld { get; set; }
         public Int64 ShuiPayToEmployeeOld { get; set; }
+        [Browsable(false)]
+        public Int64 TotalNew => BaseSalaryNew + ResponsibilityNew + HouseTransportNew + ShuiPayToEmployeeNew;
+        [Browsable(false)]
+        public Int64 TotalOld => BaseSalaryOld + ResponsibilityOld + TelephoneOld + HouseTransportOld + ShuiPayToEmployeeOld;
         public DateTime UpdateAt { get; set; }
         public Guid UpdateBy { get; set; } // update by
         public string TypeOfChanges { get; set; }
